@@ -1,0 +1,8 @@
+CHIP Mul16x1{
+ 	IN a[16], b;
+	OUT out[16];
+
+PARTS:
+Mux16(a = false,b = a,sel = b,out = out);
+}
+
