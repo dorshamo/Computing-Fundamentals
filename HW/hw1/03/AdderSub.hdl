@@ -1,0 +1,12 @@
+CHIP AdderSub {
+    IN a, b, control, cIn;
+    OUT res, cOut;
+
+    PARTS:
+    FullSub(a = a,b = b,bIn = cIn,diff = FSdiff,bOut = FSbout);
+    FullAdder(a = a,b = b,c = cIn,sum = FAsum,carry = FAcarry);
+
+    Mux(a = FAsum,b = FSdiff,sel = control,out = res);
+    Mux(a = FAcarry, b = FSbout,sel = control,out = cOut);
+}
+

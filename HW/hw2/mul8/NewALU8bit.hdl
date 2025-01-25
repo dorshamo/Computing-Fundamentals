@@ -1,0 +1,17 @@
+CHIP NewALU8bit {
+    IN a[8], b[8], opcode[2];
+    OUT out[16];
+
+PARTS:
+
+Add16(a[0..7]=a,b[0..7]=b,out=outSum);
+And16(a[0..7]=a,b[0..7]=b,out=outAnd);
+Mul8(a[0..7]=a,b[0..7]=b,out=outMulti);
+
+And16(a[0..7]=a,b[0..7]=b,out=out1);
+Not16(in=out1,out=out2);
+Or16(a[0..7]=a,b[0..7]=b,out=out3);
+And16(a=out2,b=out3,out=outXor);
+
+Mux4Way16(a=outSum,b=outAnd,c=outMulti,d=outXor,sel=opcode,out=out);
+}

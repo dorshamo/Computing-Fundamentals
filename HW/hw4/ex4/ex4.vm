@@ -1,0 +1,100 @@
+//function ex4.main 0
+function ex4.main 0
+//argument - none 
+//local - none
+//static 0-n 1-R
+
+push static 0 //n
+//SumOfSquares(n)
+call ex4.SumOfSquares 1
+//pop static 1
+pop static 1 //R
+//(END)
+label END
+//goto end label
+goto END
+
+
+
+//function SumOfSquares 2
+function ex4.SumOfSquares 2
+//argument - 0-n 
+//local - 0-i , 1-sum
+//static none
+
+//int i = 1
+push constant 1
+pop local 0//i = 1
+//int sum = 0
+push constant 0
+pop local 1//sum = 0
+//if(n != 1) goto WHILELOOP
+push argument 0 //push n
+push constant 1 //push 1
+eq //n == 1
+not // n != 1
+if-goto WHILELOOP
+//return 1
+push constant 1
+return
+
+
+label WHILELOOP
+//if(i > n)
+push local 0//i
+push argument 0//n
+gt
+if-goto ENDLOOP
+//sum = sum + n
+push local 1//sum
+push argument 0//n
+add 
+pop local 1 //sum = add
+//i = i + 1
+push constant 1
+push local 0 //i
+add
+pop local 0//i++
+//goto WHILELOOP
+goto WHILELOOP
+//(ENDWHILE)
+
+
+label ENDLOOP
+//return SumOfSquares(n-1) + sum
+push local 1//sum
+push argument 0 //n
+push constant 1 //1
+sub // n-1
+call ex4.SumOfSquares 1
+add
+return
+
+
+
+/////////////////////////////////////////////////////////
+///////////// pseodocode ////////////////////////////////
+
+
+//void main(){
+//       static int n;
+//       static int R;
+//       R = SumOfSquares(n);
+//    LOOP:
+//       goto LOOP;
+//    }
+
+//    int SumOfSquares(n){
+//       sum = 0;
+//       i = 1;
+//       if (n!=1) goto WHILE_LOOP;
+//       return 1;
+// .  WHILE_LOOP:
+//       if (i>n) goto ENDLOOP;
+//       sum = sum + n;
+//       i = i + 1;
+//       goto WHILE_LOOP;
+//    ENDLOOP:
+//       return SumOfSquares(n-1) + sum;
+//   } 
+

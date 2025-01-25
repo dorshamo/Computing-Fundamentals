@@ -1,0 +1,29 @@
+CHIP Mul8 {
+    IN a[8], b[8];
+    OUT out[16];
+
+PARTS:
+Mul16x1(a[0..7] = a,a[8..15] = false,b = b[0],out = out1);
+ShiftLeft16(in[0..7] = a,in[8..15] = false,out = aout1);
+Mul16x1(a = aout1,b = b[1],out = out2);
+ShiftLeft16(in = aout1,out = aout2);
+Mul16x1(a = aout2,b = b[2],out = out3);
+ShiftLeft16(in = aout2,out = aout3);
+Mul16x1(a = aout3,b = b[3],out = out4);
+ShiftLeft16(in = aout3,out = aout4);
+Mul16x1(a = aout4,b = b[4],out = out5);
+ShiftLeft16(in = aout4,out = aout5);
+Mul16x1(a = aout5,b = b[5],out = out6);
+ShiftLeft16(in = aout5,out = aout6);
+Mul16x1(a = aout6,b = b[6],out = out7);
+ShiftLeft16(in = aout6,out = aout7);
+Mul16x1(a = aout7,b = b[7],out = out8);
+
+Add16(a = out1,b = out2,out = sum1);
+Add16(a = sum1,b = out3,out = sum2);
+Add16(a = sum2,b = out4,out = sum3);
+Add16(a = sum3,b = out5,out = sum4);
+Add16(a = sum4,b = out6,out = sum5);
+Add16(a = sum5,b = out7,out = sum6);
+Add16(a = sum6,b = out8,out = out);
+}
